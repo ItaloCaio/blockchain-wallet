@@ -52,7 +52,7 @@ angular.module("appStefanini").controller("appArtworkCtrl", function ($scope, $h
             window.location.reload();
         }
         function errorCallback(error) {
-            alert("erro ao adiciona o autor");
+            alert("erro ao adiciona o obra");
         }
     }
 
