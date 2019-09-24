@@ -5,6 +5,7 @@ angular.module("appStefanini").controller("appArtworkCtrl", function ($scope, $h
     urlArtwork= 'http://localhost:8080/artworks';
 
     var pathname = window.location.pathname.split( '/' );
+    var urlArtworkById = 'http://localhost:8080/artworks/' +  pathname[2];
 
     $scope.getArtworks = function () {
 
@@ -31,7 +32,6 @@ angular.module("appStefanini").controller("appArtworkCtrl", function ($scope, $h
     };
 
     $scope.getArtworkById = function (){
-        urlArtworkById = urlArtwork +  pathname[2];
 
         $http.get(urlArtworkById).then(successCallback, errorCallback);
         function successCallback(response) {
@@ -45,30 +45,49 @@ angular.module("appStefanini").controller("appArtworkCtrl", function ($scope, $h
 
     $scope.addArtwork = function (artwork){
 
-        console.log(artwork);
-        console.log(artwork.authors);
-        //$http.post(urlArtwork, artwork).then(successCallback, errorCallback);
+        $http.post(urlArtwork, artwork).then(successCallback, errorCallback);
 
         function successCallback(response) {
-            $scope.stream = response.data;
+            $scope.artwork = response.data;
             window.location.reload();
-
         }
         function errorCallback(error) {
             alert("erro ao adiciona o autor");
         }
     }
 
-    $scope.removeArtwork = function(author){
+    $scope.removeArtwork = function(artwork){
+        console.log(urlArtworkById);
+        $http.delete(urlArtworkById, artwork).then(successCallback, errorCallback);
+
+        function successCallback(response) {
+            window.location.reload();
+        }
+        function errorCallback(error) {
+            alert("erro ao remover a obra");
+        }
 
     }
 
-    $scope.updateArtwork = function(author){
+    $scope.updateArtwork = function(artwork){
+        $http.put(urlArtworkById, artwork).then(successCallback, errorCallback);
+
+        function successCallback(response) {
+            window.location.reload();
+        }
+        function errorCallback(error) {
+            alert("erro ao atualizar a obra");
+        }
 
     }
 
     $scope.getArtworks();
     $scope.getAuthors();
+
+    if(pathname.length > 2){
+        console.log("if");
+        $scope.getArtworkById();
+    }
 
 
 });

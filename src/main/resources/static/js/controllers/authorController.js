@@ -5,7 +5,7 @@ angular.module("appStefanini").controller("appAuthorCtrl", function ($scope, $ht
     urlAuthor = 'http://localhost:8080/authors';
 
     var pathname = window.location.pathname.split( '/' );
-
+    var urlAuthorById = 'http://localhost:8080/authors/' +  pathname[2];
     $scope.getAuthors = function () {
 
         $http.get(urlAuthor).then(successCallback, errorCallback);
@@ -18,10 +18,22 @@ angular.module("appStefanini").controller("appAuthorCtrl", function ($scope, $ht
         }
     };
 
-    $scope.getAuthorById = function (){
-        urlAuthorById = urlAuthor +  pathname[2];
+    $scope.getArtworks = function () {
+        urlArtwork = 'http://localhost:8080/artworks';
+        $http.get(urlArtwork).then(successCallback, errorCallback);
 
-        $http.get(urlClassById).then(successCallback, errorCallback);
+        function successCallback(response) {
+            $scope.artworks = response.data;
+        }
+        function errorCallback(error) {
+            alert("erro no get");
+        }
+    };
+
+    $scope.getAuthorById = function (){
+
+
+        $http.get(urlAuthorById).then(successCallback, errorCallback);
 
         function successCallback(response) {
             $scope.authorId = response.data;
@@ -32,11 +44,10 @@ angular.module("appStefanini").controller("appAuthorCtrl", function ($scope, $ht
         }
     }
 
-    $scope.addAuthor = function (stream){
+    $scope.addAuthor = function (author){
 
-        stream.user = $scope.userLogado;
-        stream.aClass = $scope.classId;
-        $http.post(urlAuthor, stream).then(successCallback, errorCallback);
+
+        $http.post(urlAuthor, author).then(successCallback, errorCallback);
 
         function successCallback(response) {
             $scope.stream = response.data;
@@ -50,13 +61,39 @@ angular.module("appStefanini").controller("appAuthorCtrl", function ($scope, $ht
 
     $scope.removeAuthor = function(author){
 
+        $http.delete(urlAuthorById, author).then(successCallback, errorCallback);
+
+        function successCallback(response) {
+            window.location.reload();
+
+        }
+        function errorCallback(error) {
+            alert("erro ao atualizar o autor");
+        }
+
     }
 
     $scope.updateAuthor = function(author){
 
+        $http.put(urlAuthorById, author).then(successCallback, errorCallback);
+
+        function successCallback(response) {
+            window.location.reload();
+
+        }
+        function errorCallback(error) {
+            alert("erro ao atualizar o autor");
+        }
     }
 
+
     $scope.getAuthors();
+    $scope.getArtworks();
+
+    if(pathname.length > 2){
+        console.log("if");
+        $scope.getAuthorById();
+    }
 
 
 });

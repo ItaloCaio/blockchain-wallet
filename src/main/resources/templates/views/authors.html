@@ -24,10 +24,10 @@
         <nav>
           <ul class="nav nav-pills float-right">
             <li class="nav-item">
-              <a class="nav-link " href="/autores">Autores<span class="sr-only">(current)</span></a>
+              <a class="nav-link active" href="/autores">Autores<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/obras">Obras</a>
+              <a class="nav-link " href="/obras">Obras</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/cadastrar-autor">Cadastrar Autor</a>
@@ -44,14 +44,14 @@
       <main role="main">
 
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="author in authors">{{author.name}}</li>
+          <li class="list-group-item" ng-repeat="author in authors"><a class="stretched-link" href="/autor/{{author.id}}">{{author.name}}</a></li>
         </ul>     
 
 
       </main>
 
       <footer class="footer">
-        <p>&copy; Company 2017</p>
+        <p>&copy; Ítalo Carvalho</p>
       </footer>
 
     </div> <!-- /container -->

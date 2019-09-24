@@ -1,7 +1,12 @@
 package app.application.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +16,11 @@ public class Artwork extends AbstractEntity {
     private String description;
     private String publication_date;
     private String exhibition_date;
-    @ManyToMany(mappedBy="artworks")
+    @JsonIgnoreProperties("artworks")
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name="author_artworks", joinColumns=
+        {@JoinColumn(name="artworks_id")}, inverseJoinColumns=
+        {@JoinColumn(name="authors_id")})
     private List<Author> authors;
 
     public Artwork(){

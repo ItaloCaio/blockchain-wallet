@@ -13,9 +13,9 @@ public class ArtworkController {
         return "views/artworks";
     }
 
-    @RequestMapping(value = "/obras/{codigo}", method = RequestMethod.GET)
+    @RequestMapping(value = "/obra/{codigo}", method = RequestMethod.GET)
     public String artworkById(@PathVariable("codigo") long codigo) {
-        return "views/artworks";//author-manage
+        return "views/manageArtwork";
     }
 
     @RequestMapping(value = "/cadastrar-obra", method = RequestMethod.GET)

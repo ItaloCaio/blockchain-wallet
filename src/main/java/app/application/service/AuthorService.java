@@ -64,16 +64,17 @@ public class AuthorService implements IAuthorService {
     }
 
     @Override
-    public Author remove(Author item) {
+    public void remove(Long id) {
         try{
-            verifyIfAuthorExists(item.getId());
-            DeleteAuthorValidator.validate(item);
+            verifyIfAuthorExists(id);
+            DeleteAuthorValidator.validate(authorRepository.findOne(id));
+            authorRepository.delete(id);
         }
         catch (Exception err){
             System.out.println(err.getMessage());
         }
-        authorRepository.delete(item.getId());
-        return item;
+
+
     }
 
     @Override

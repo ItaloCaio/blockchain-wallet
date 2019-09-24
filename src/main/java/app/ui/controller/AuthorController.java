@@ -13,8 +13,13 @@ public class AuthorController {
         return "views/authors";
     }
 
-    @RequestMapping(value = "/autores/{codigo}", method = RequestMethod.GET)
+    @RequestMapping(value = "/autor/{codigo}", method = RequestMethod.GET)
     public String authorById(@PathVariable("codigo") long codigo) {
-        return "views/authors";//author-manage
+        return "views/manageAuthor";
+    }
+
+    @RequestMapping(value = "/cadastrar-autor", method = RequestMethod.GET)
+    public String authorRegister() {
+        return "views/registerAuthor";
     }
 }

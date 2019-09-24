@@ -17,7 +17,7 @@
       <script src="js/angular.min.js" type="text/javascript"></script>
   </head>
 
-  <body ng-controller="appArworkCtrl">
+  <body ng-controller="appArtworkCtrl">
 
     <div class="container">
       <header class="header clearfix">
@@ -44,8 +44,7 @@
       <main role="main">
 
        <ul class="list-group">
-        <li class="list-group-item" ng-repeat="arwork in arworks"></li>
-
+        <li class="list-group-item" ng-repeat="artwork in artworks"><a class="stretched-link" href="/obra/{{artwork.id}}">{{artwork.name}}</a> </li>
       </ul>     
 
  </main>
@@ -56,6 +55,6 @@
 
     </div> <!-- /container -->
   </body>
-
   <script src="js/controllers/artworkController.js"></script>
+
 </html>

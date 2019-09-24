@@ -1,6 +1,7 @@
 package app.ui.rest.controller;
 
 import app.application.domain.model.Artwork;
+import app.application.domain.model.Author;
 import app.application.port.IArtworkService;
 import app.application.service.ArtworkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +42,15 @@ public class ArtworkRestController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> deleteArtwork(@PathVariable long id, @RequestBody Artwork artwork ) {
+    public ResponseEntity<?> deleteArtwork(@PathVariable long id ) {
 
-        artworkService.remove(artwork);
+        artworkService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> updateArtwork(@RequestBody Artwork artwork) {
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<?> updateArtwork(@PathVariable long id, @RequestBody Artwork artwork) {
+        artwork.setId(id);
         artworkService.update(artwork);
         return new ResponseEntity<>(HttpStatus.OK);
     }

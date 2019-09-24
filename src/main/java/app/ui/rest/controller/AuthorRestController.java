@@ -42,14 +42,15 @@ public class AuthorRestController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> deleteAuthor(@PathVariable long id, @RequestBody Author author) {
-        authorService.remove(author);
+    public ResponseEntity<?> deleteAuthor(@PathVariable long id) {
+        authorService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateAuthor(@RequestBody Author author) {
-
+    public ResponseEntity<?> updateAuthor(@PathVariable("id") long id, @RequestBody Author author) {
+        System.out.println(author.getName());
+        author.setId(id);
         authorService.update(author);
         return new ResponseEntity<>(HttpStatus.OK);
     }

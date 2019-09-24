@@ -11,7 +11,7 @@ public interface IService<T> {
 
     T update(T item);
 
-    T remove(T item);
+    void remove(Long id);
 
     int count();
 

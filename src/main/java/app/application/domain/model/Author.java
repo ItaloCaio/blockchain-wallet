@@ -1,9 +1,11 @@
 package app.application.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 @Entity
 public class Author extends AbstractEntity {
 
@@ -13,10 +15,14 @@ public class Author extends AbstractEntity {
     private String gender;
     private String email;
     private String cpf;
-    @ManyToMany
-    private List<Artwork> artworks;
+    @JsonIgnoreProperties("authors")
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name="author_artworks", joinColumns=
+        {@JoinColumn(name="authors_id")}, inverseJoinColumns=
+        {@JoinColumn(name="artworks_id")})
+    private List<Artwork> artworks ; //= new ArrayList<>();
 
-    public Author(){
+    public Author() {
 
     }
 

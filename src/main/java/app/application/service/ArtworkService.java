@@ -61,16 +61,15 @@ public class ArtworkService implements IArtworkService {
     }
 
     @Override
-    public Artwork remove(Artwork item) {
-
+    public void remove(Long id) {
         try{
-            verifyIfArtworkExists(item.getId());
-            artworkRepository.delete(item.getId());
+            verifyIfArtworkExists(id);
+            artworkRepository.delete(id);
         }
         catch (Exception err){
             System.out.println(err.getMessage());
         }
-        return item;
+
     }
 
     @Override
