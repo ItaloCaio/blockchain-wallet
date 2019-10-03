@@ -86,7 +86,7 @@ public class AuthorService implements IAuthorService {
             throw new ResourceNotFoundException("Author not found for ID: " + id);
     }
 
-    private void verifyIfEmailExists(String email){
+    private void verifyIfEmailExists(String email) throws EmailExistException {
         for (Author author: this.getAll()){
             if (author.getEmail() == email){
                 throw new EmailExistException();
@@ -94,7 +94,7 @@ public class AuthorService implements IAuthorService {
         }
 
     }
-    private void verifyIfCpfExists(String cpf){
+    private void verifyIfCpfExists(String cpf) throws CpfExistException {
         for (Author author: this.getAll()){
             if (author.getCpf() == cpf){
                 throw new CpfExistException();
