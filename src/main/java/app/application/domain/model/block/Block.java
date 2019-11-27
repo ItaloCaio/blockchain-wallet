@@ -1,5 +1,7 @@
 package app.application.domain.model.block;
 
+import app.ui.rest.util.BlockEnv;
+
 import java.util.ArrayList;
 import java.util.Date;
 

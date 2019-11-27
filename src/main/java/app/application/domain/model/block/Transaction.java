@@ -1,4 +1,6 @@
 package app.application.domain.model.block;
+import app.ui.rest.util.BlockEnv;
+
 import java.security.*;
 import java.util.ArrayList;
 
@@ -32,13 +34,13 @@ public class Transaction {
 				
 		//Gathers transaction inputs (Making sure they are unspent):
 		for(TransactionInput i : inputs) {
-			i.UTXO = Main.UTXOs.get(i.transactionOutputId);
+			i.UTXO = BlockEnv.UTXOs.get(i.transactionOutputId);
 		}
 
 		//Checks if transaction is valid:
-		if(getInputsValue() < Main.minimumTransaction) {
+		if(getInputsValue() < BlockEnv.minimumTransaction) {
 			System.out.println("Transaction Inputs too small: " + getInputsValue());
-			System.out.println("Please enter the amount greater than " + Main.minimumTransaction);
+			System.out.println("Please enter the amount greater than " + BlockEnv.minimumTransaction);
 			return false;
 		}
 		
@@ -50,13 +52,13 @@ public class Transaction {
 				
 		//Add outputs to Unspent list
 		for(TransactionOutput o : outputs) {
-			Main.UTXOs.put(o.id , o);
+			BlockEnv.UTXOs.put(o.id , o);
 		}
 		
 		//Remove transaction inputs from UTXO lists as spent:
 		for(TransactionInput i : inputs) {
 			if(i.UTXO == null) continue; //if Transaction can't be found skip it 
-			Main.UTXOs.remove(i.UTXO.id);
+			BlockEnv.UTXOs.remove(i.UTXO.id);
 		}
 		
 		return true;
