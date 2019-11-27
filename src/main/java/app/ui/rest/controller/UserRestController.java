@@ -2,9 +2,11 @@ package app.ui.rest.controller;
 
 
 import app.application.domain.model.User;
+import app.application.domain.model.block.Wallet;
 import app.infrastructure.repository.UserRepository;
 import app.ui.error.CustomErrorType;
 import app.ui.exception.ResourceNotFoundException;
+import app.ui.rest.util.BlockEnv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +46,10 @@ public class UserRestController {
     public ResponseEntity<?> getUserOn(@AuthenticationPrincipal UserDetails userDetails) {
 
         User user = userRepository.findByUsername(userDetails.getUsername());
+       Wallet walletA = new Wallet();
+        //create genesis transaction, which sends 100 NoobCoin to walletA:
+        BlockEnv.initTransaction(walletA);
+        BlockEnv.initBlock();
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -57,7 +63,6 @@ public class UserRestController {
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable long id) {
         verifyUserIfStudentExists(id);

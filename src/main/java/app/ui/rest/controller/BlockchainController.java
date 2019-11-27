@@ -26,12 +26,11 @@ public class BlockchainController {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider()); //Setup Bouncey castle as a Security Provider
 
         //Create wallets:
-        walletA = new Wallet();
-        walletB = new Wallet();
 
+        walletB = new Wallet();
+        walletA = new Wallet();
         //create genesis transaction, which sends 100 NoobCoin to walletA:
         BlockEnv.initTransaction(walletA);
-
         BlockEnv.initBlock();
 
         //testing
@@ -45,10 +44,10 @@ public class BlockchainController {
     }
 
 
-    public static void getBalanceWallet(Wallet wallet){
+    public static float getBalanceWallet(Wallet wallet){
 
         System.out.println("\nWallet's balance is: " + wallet.getBalance());
-
+        return wallet.getBalance();
     }
 
     public static void sendFunds(Wallet walletA, Wallet walletB, float value){
