@@ -1,5 +1,6 @@
 package app.application.domain.model;
 
+import app.application.domain.model.block.Wallet;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
@@ -29,6 +30,5 @@ public class User extends AbstractEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 }

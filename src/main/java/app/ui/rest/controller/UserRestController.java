@@ -46,10 +46,6 @@ public class UserRestController {
     public ResponseEntity<?> getUserOn(@AuthenticationPrincipal UserDetails userDetails) {
 
         User user = userRepository.findByUsername(userDetails.getUsername());
-       Wallet walletA = new Wallet();
-        //create genesis transaction, which sends 100 NoobCoin to walletA:
-        BlockEnv.initTransaction(walletA);
-        BlockEnv.initBlock();
 
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

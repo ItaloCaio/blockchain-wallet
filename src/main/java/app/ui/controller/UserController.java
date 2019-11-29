@@ -1,5 +1,7 @@
 package app.ui.controller;
 
+import app.ui.rest.controller.BlockchainController;
+import app.ui.rest.util.BlockEnv;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,16 @@ public class UserController {
     public String home(@AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null)
             return "views/signin";
-        else
-            return "views/authors";
+        else{
+//            //create genesis transaction, which sends 100 NoobCoin to walletA:
+//                int aux = 0;
+//
+//                if (aux < 1){
+//                    BlockchainController  blockchainController = new BlockchainController();
+//                }
+//                aux ++;
+            return "views/wallet";
+        }
+
     }
 }

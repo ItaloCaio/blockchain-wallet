@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" ng-app="appBlockchain">
+  <head>
+      <meta charset="utf-8"> </meta>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+      <meta name="description" content=""></meta>
+      <meta name="author" content=""></meta>
+
+    <title>Blockchain</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/narrow-jumbotron.css" rel="stylesheet"/>
+
+      <script src="js/angular.min.js" type="text/javascript"></script>
+  </head>
+
+  <body ng-controller="appBlockCtrl">
+    <div class="container">
+      <header class="header clearfix">
+        <h3 class="text-muted">Sistemas Multimídia</h3>
+      </header>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Wallet A</h5>
+                            <h6 class="card-subtitle mb-2 ">Disponível:</h6>
+                            <h6 class="card-subtitle mb-2 text-success"> {{walletA}}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Wallet B</h5>
+                            <h6 class="card-subtitle mb-2 ">Disponível:</h6>
+                            <h6 class="card-subtitle mb-2 text-success"> {{walletB}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <br/>
+                <div class="row col-md-4">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" ng-model="value" placeholder="10" />
+                </div>
+                <br/>
+                <div class="row">
+                    <a class="btn btn-primary" ng-click="addValue(value)"> Enviar Valor</a>
+                    <br/>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div> <!-- /container -->
+  </body>
+  <script src="js/controllers/block.js"></script>
+</html>
